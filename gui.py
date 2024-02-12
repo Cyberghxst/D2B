@@ -1,19 +1,19 @@
 import customtkinter as ctk
-from typing import Any, Literal
+from typing import Any
 from PIL import Image
+import re, os, dotenv
+
+dotenv.load_dotenv()
 
 class Utils():
     """
     A Utility class for various methods.
     """
-    def isbinary(code: str | int):
+    def isbinary(entry: str | int):
         """
         Check if the provided number is a valid binary.
         """
-        for i, char in enumerate(str(code)):
-            if char not in ['0', '1']:
-                return False
-        return True
+        return False if re.match(r'^[01]+$', entry) == None else True
     
     def resolve_binary(binary: Any):
         """
@@ -110,7 +110,7 @@ class BinaryConverter():
     """
     def __init__(self, width: int | None = None, height: int | None = None):
         # Window variables.
-        self._name = 'Jeffrey Villatoro Quezada'
+        self._name = os.getenv('CREATOR_NAME')
         self._button_corner_radius = 20
         self._dimentions: list[str] = []
         self._window = ctk.CTk()
@@ -212,7 +212,7 @@ class BinaryConverter():
 class DecimalConverter():
     def __init__(self, width: int | None = None, height: int | None = None):
         # Window variables.
-        self._name = 'Jeffrey Villatoro Quezada'
+        self._name = os.getenv('CREATOR_NAME')
         self._button_corner_radius = 20
         self._dimentions: list[str] = []
         self._window = ctk.CTk()
@@ -317,7 +317,7 @@ class Program():
     """
     def __init__(self, name: str):
         # Program variables.
-        self._name = 'Jeffrey Villatoro Quezada'
+        self._name = os.getenv('CREATOR_NAME')
         self._button_corner_radius = 20
         self._window = ctk.CTk()
         self.name = name
